@@ -23,104 +23,107 @@
 </head>
 <body>
 	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
-				</div>
+<!--===============================================================================-->
+							<!-- LOGIN -->
+<!--===============================================================================-->
 
-				<form class="login100-form validate-form" action="index.php" method="POST">
-					<span class="login100-form-title">
-						Login
-					</span>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="senha">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn">Entrar</button>
-					</div>
-					<div class="text-center p-t-12">
-						<a class="txt2" href="#">
-							Esqueceu e-mail ou senha? clique aqui.
-						</a>
-					</div>
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Criar nova conta
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
+<div id="login" class="limiter">
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div class="login100-pic js-tilt" data-tilt>
+				<img src="images/323.jpg" alt="IMG">
 			</div>
+
+			<form id="form-login" class="login100-form validate-form" action="controller/autentica.php" method="POST">
+				<span class="login100-form-title">
+					Login
+				</span>
+				<div class="alert alert-danger" style="display: none;">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<strong></strong>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate = "Digite algum e-mail">
+					<input class="input100" type="text" name="email">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate = "Digite alguma senha">
+					<input class="input100" type="password" name="senha">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="container-login100-form-btn">
+					<button type="submit" class="login100-form-btn">Entrar<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+				</div>
+				<div class="text-center p-t-136">
+					<a id="nova-conta" class="txt2" href="#">
+						Criar nova conta
+						<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+					</a>
+				</div>
+			</form>
 		</div>
 	</div>
-	
-	<?php 
-		if ($_POST) {
-			include 'connect/connect.php';
-			include 'connect/userDAO.php';
+</div>
 
-			$usuarioDAO = new UserDAO();
+<!--===============================================================================-->
+							<!-- CADASTRO -->
+<!--===============================================================================-->
 
-			$email = addslashes($_POST['email']);
-			$senha = addslashes($_POST['senha']);
-			
-			$user = $usuarioDAO->logar($email, $senha);
+<div id="cadastro" class="limiter" style="display:none;">
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div class="login100-pic js-tilt" data-tilt>
+				<img src="images/323.jpg" alt="IMG">
+			</div>
 
-			if ($user == true) {
-				session_start();
-				$_SESSION['email'] = $email;
-				$_SESSION['senha'] = $senha;
-
-				header('Location: admin.php');
-			} else {
-				header('Location: index.php?erro=senha');
-			}
-		}
-	?>
-
-	<?php 
-		if ($_GET) {
-			if (isset($_GET['erro'])) {
-				echo " 
-
-					<div class='row'>
-					</div>
-			<div class='row'>
-				
-
-				<div class='col-md-4'>      
-				
+			<form id="form-cadastro" class="login100-form validate-form" action="" method="POST">
+				<input type="hidden" name="action">
+				<span class="login100-form-title">
+					Cadastro
+				</span>
+				<div class="alert alert-danger" style="display: none;">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<strong></strong>
 				</div>
-				
-				
-				<div class='col-md-4'>      
-					<div class='alert alert-danger'>
-						Usuário ou senha inválidos!
-					</div>   
+				<div class="wrap-input100 validate-input" data-validate = "Digite o nome">
+					<input class="input100" type="text" name="nome">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
 				</div>
-					
-					<div class='col-md-4'>      
-				
+				<div class="wrap-input100 validate-input" data-validate = "Digite algum e-mail">
+					<input class="input100" type="text" name="email">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
 				</div>
-					
-
-				</div>";
-			}
-		}
-	?>
+				<div class="wrap-input100 validate-input" data-validate = "Digite alguma senha">
+					<input class="input100" type="password" name="senha">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="container-login100-form-btn">
+					<button type="submit" class="login100-form-btn">Salvar<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+				</div>
+				<div class="text-center p-t-136">
+					<a id="realiza-login" class="txt2" href="#">
+						<i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
+						Realizar login
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -131,12 +134,59 @@
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
+
+	<script>
+		$(document).ready(function() {
+			$('.js-tilt').tilt({
+				scale: 1.2
+			});
+
+			$('#form-login').unbind('submit').submit(function(e) {
+				e.preventDefault();
+				$.ajax({
+					method:'POST',
+					url: 'controller/autentica.php',
+					data: $(this).serialize(),
+					dataType:'json',
+					success: function(json) {
+						if (json.type == 'success') {
+							window.location.href = 'views/template.php';
+						} else {
+							$('.alert-danger').css('display', 'block');
+							$('.alert-danger strong').html(json.msg);
+						}
+					}
+				})
+			});
+
+			$('#form-cadastro').unbind('submit').submit(function(e) {
+				e.preventDefault();
+				
+				$('[name="action"]').val('inserirUser');
+
+				$.ajax({
+					method:'POST',
+					url: 'controller/crud.php',
+					data: $(this).serialize(),
+					dataType:'json',
+					success: function(json) {
+					}
+				})
+			});
+
+			$('#nova-conta').unbind('click').click(function() {
+				$('#login').css('display', 'none');
+				$('#cadastro').css('display', 'block');
+				$('.alert-danger').css('display', 'none');
+			});
+
+			$('#realiza-login').unbind('click').click(function() {
+				$('#cadastro').css('display', 'none');
+				$('#login').css('display', 'block');
+			});
+		});
 	</script>
-<!--===============================================================================================-->
+
 	<script src="js/main.js"></script>
 
 </body>

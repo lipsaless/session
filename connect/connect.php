@@ -10,10 +10,10 @@ class Connect
 
     public function __construct()
     {
-        $this->conn = mysqli_connect($this->server, $this->user, $this->password, $this->bank) 
+        $this->conn = mysqli_connect($this->server, $this->user, $this->password) 
         or die('Falha na conexão'. mysqli_connect_error($this->conn));
 
-        mysqli_select($this->conn,$this->bank) 
+        mysqli_select_db($this->conn,$this->bank) 
         or die('Falha ao selecionar banco'. mysqli_connect_error($this->conn));
     }
 
