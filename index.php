@@ -86,7 +86,7 @@
 				<span class="login100-form-title">
 					Cadastro
 				</span>
-				<div class="alert alert-danger" style="display: none;">
+				<div class="alert alert-success" style="display: none;">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<strong></strong>
 				</div>
@@ -170,6 +170,15 @@
 					data: $(this).serialize(),
 					dataType:'json',
 					success: function(json) {
+						if (json.type == 'success') {
+							$('.alert-success').css('display', 'block');
+							$('.alert-success strong').html(json.msg);
+							$('#form-cadastro')[0].reset()
+						} else {
+							$('.alert-success').addClass('alert-danger');
+							$('.alert-danger').removeClass('alert-danger');
+							$('.alert-danger strong').html(json.msg);
+						}
 					}
 				})
 			});
